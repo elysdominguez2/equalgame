@@ -65,7 +65,7 @@ export default function Game() {
         </div>
       ) : (
         <div className="flex">
-          <div className="flex flex-wrap bg-landscape max-h-fit bg-no-repeat container ml-10 mt-8 justify-center ">
+          <div className="flex flex-wrap bg-landscape max-h-fit bg-no-repeat container ml-10 mt-8 justify-center w-5/6">
             {characters.map((c) => (
               <div key={c.id}>
                 <MoveCharacter
@@ -85,16 +85,16 @@ export default function Game() {
               </div>
             ))}
           </div>
-          <div>
+          <div className="w-1/6">
             <div className="mr-24 mt-24 flex flex-col text-center">
-              <h2 className=" text-fuchsia-500 animate-pulse drop-shadow-3xl text-7xl font-BungeeShade my-20">
+              <img src={imageToCompare} alt="" className="w-56" />
+
+              <h2 className=" text-white  text-2xl my-10">
                 Change image:{time}
               </h2>
-
-              <img src={imageToCompare} alt="" />
             </div>
             <div>
-              <h2 className="mr-24 font-mono text-5xl text-center text-yellow-400 drop-shadow-3xl font-bold">
+              <h2 className="mr-24 font-mono text-4xl text-center text-yellow-400 drop-shadow-3xl font-bold">
                 {" "}
                 SCORE: {points}
               </h2>
