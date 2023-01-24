@@ -17,7 +17,7 @@ import {
 import Winner from "../components_equalgame/Winner";
 import useSound from "use-sound";
 import winnerSound from "../audio/winner.mp3";
-// import timeoutSound from "../audio/yummy.mp3";
+import timeoutSound from "../audio/yummy.mp3";
 
 export default function Game() {
   const characters = useSelector(selectCharacters);
@@ -36,14 +36,21 @@ export default function Game() {
 
   let [count, setCount] = useState(0);
   let [time, setTime] = useState(0);
-  //   const [playTimeout] = useSound(timeoutSound);
+  const [playTimeout, { stopPlayTimeout }] = useSound(timeoutSound);
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      setCount((count) => count + 1);
-    }, 15000);
-    return () => clearInterval(timer);
-  }, []);
+    if (points !== 5) {
+      const timer = setInterval(() => {
+        playTimeout();
+        setCount((count) => count + 1);
+
+        if (points === 5) {
+          stopPlayTimeout();
+        }
+      }, 15000);
+      return () => clearInterval(timer);
+    }
+  }, [count, points, stopPlayTimeout, playTimeout]);
 
   useEffect(() => {
     const ti = setInterval(() => {
@@ -61,7 +68,7 @@ export default function Game() {
       {points === 5 ? (
         <div>
           <Winner />
-          {playWinner()}
+          {/* {playWinner()} */}
         </div>
       ) : (
         <div className="flex">
@@ -89,9 +96,9 @@ export default function Game() {
             <div className="mr-24 mt-24 flex flex-col text-center">
               <img src={imageToCompare} alt="" className="w-56" />
 
-              <h2 className=" text-white  text-2xl my-10">
+              {/* <h2 className=" text-white  text-2xl my-10">
                 Change image:{time}
-              </h2>
+              </h2> */}
             </div>
             <div>
               <h2 className="mr-24 font-mono text-4xl text-center text-yellow-400 drop-shadow-3xl font-bold">
@@ -105,17 +112,3 @@ export default function Game() {
     </div>
   );
 }
-
-////
-// h1 {
-// 	animation: neon1 1.5s ease-in-out infinite alternate;
-// }
-
-// #overlay {
-// 	position: absolute;
-// 	right: 0;
-// 	left: 0;
-// 	margin: auto;
-// 	width: 100%;
-// 	text-align: center;
-// }

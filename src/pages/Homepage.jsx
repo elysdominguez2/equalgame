@@ -9,6 +9,7 @@ export const Homepage = () => {
   const playClick = () => {
     new Audio(click).play();
   };
+
   return (
     <div className="bg-black h-screen text-white text-2xl uppercase">
       <div className="flex justify-center">
