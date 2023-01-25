@@ -7,6 +7,7 @@ import imagebug38 from "../img_equalgame/bug38.png";
 import imagebug15 from "../img_equalgame/bug15.png";
 import imagebug22 from "../img_equalgame/bug22.png";
 import imagebug31 from "../img_equalgame/bug31.png";
+
 import MoveCharacter from "../components_equalgame/MoveCharacter";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
@@ -15,8 +16,9 @@ import {
   selectScore,
 } from "../store_equals/characters/selectors";
 import Winner from "../components_equalgame/Winner";
+
 import useSound from "use-sound";
-import winnerSound from "../audio/winner.mp3";
+// import winnerSound from "../audio/winner.mp3";
 import timeoutSound from "../audio/yummy.mp3";
 
 export default function Game() {
@@ -35,7 +37,7 @@ export default function Game() {
   ];
 
   let [count, setCount] = useState(0);
-  let [time, setTime] = useState(0);
+  //   let [time, setTime] = useState(0);
   const [playTimeout, { stopPlayTimeout }] = useSound(timeoutSound);
 
   useEffect(() => {
@@ -52,16 +54,16 @@ export default function Game() {
     }
   }, [count, points, stopPlayTimeout, playTimeout]);
 
-  useEffect(() => {
-    const ti = setInterval(() => {
-      setTime((time) => time + 1);
-    }, 1000);
-    return () => clearInterval(ti);
-  }, []);
+  //   useEffect(() => {
+  //     const ti = setInterval(() => {
+  //       setTime((time) => time + 1);
+  //     }, 1000);
+  //     return () => clearInterval(ti);
+  //   }, []);
 
   const imageToCompare = image[count % image.length];
 
-  const [playWinner] = useSound(winnerSound);
+  //   const [playWinner] = useSound(winnerSound);
 
   return (
     <div className=" bg-landscape bg-cover max-h-fit bg-no-repeat">
